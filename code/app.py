@@ -8,7 +8,7 @@ from bs4.element import Comment
 import requests
 from time import sleep
 from collections import Counter
-from duckduckgo_search import ddg_news
+from duckduckgo_search import ddg_news, ddg
 
 app = Flask(__name__)
 nlp = spacy.load("en_core_web_sm")
@@ -71,15 +71,15 @@ def get_recommendations(urls):
         for entity in related_entities:
             query = f"{entity}"
             # results = search('"' + query + '"', num_results=5, sleep_interval=1)
-            response = ddg_news(query)
+            response = ddg(query)
             # print(response)
             results = []
             if response is None or len(response) < 1:
                 continue
             for item in response:
-                if 'url' in item:
+                if 'href' in item:
                     results.append({
-                        'url': item['url'],
+                        'url': item['href'],
                         'title': item['title']
                     })
             i = 0
