@@ -1,0 +1,11 @@
+{
+  "manifest_version": 3,
+  "name": "A Social Browser Extension",
+  "description": "A social browser extension which can recommend webpages based on history",
+  "version": "1.0",
+  "action": {
+    "default_popup": "index.html",
+    "default_icon": "logo.png"
+  },
+  "permissions": ["history"]
+}
