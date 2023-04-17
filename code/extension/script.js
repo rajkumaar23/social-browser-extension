@@ -1,9 +1,14 @@
+window.addEventListener('load', function() {
+  updateInterface(JSON.parse(localStorage.getItem('recommendationsObject')));
+});
+
 const submitBtn = document.querySelector('#submitBtn');
 submitBtn.addEventListener('click', async () => {
   const historyUrls = await getHistoryUrls();
   const loading = document.querySelector('#loading');
   loading.style.display = 'block';
   const recommendations = await getRecommendations(historyUrls);
+  localStorage.setItem('recommendationsObject', JSON.stringify(recommendations));
   updateInterface(recommendations);
   loading.style.display = 'none';
 });
