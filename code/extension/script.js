@@ -1,5 +1,10 @@
 window.addEventListener("load", function () {
-  updateInterface(JSON.parse(localStorage.getItem("recommendationsObject") || []));
+  const recommendations = JSON.parse(
+    localStorage.getItem("recommendationsObject")
+  );
+  if (recommendations) {
+    updateInterface(recommendations);
+  }
 });
 
 const submitBtn = document.querySelector("#submitBtn");
@@ -8,11 +13,13 @@ submitBtn.addEventListener("click", async () => {
   const loading = document.querySelector("#loading");
   loading.style.display = "block";
   const recommendations = await getRecommendations(historyUrls);
-  localStorage.setItem(
-    "recommendationsObject",
-    JSON.stringify(recommendations)
-  );
-  updateInterface(recommendations);
+  if (recommendations) {
+    localStorage.setItem(
+      "recommendationsObject",
+      JSON.stringify(recommendations)
+    );
+    updateInterface(recommendations);
+  }
   loading.style.display = "none";
 });
 
