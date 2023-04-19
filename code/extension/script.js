@@ -35,7 +35,7 @@ async function getHistoryUrls() {
 
 async function getRecommendations(historyUrls) {
   const requestBody = JSON.stringify({ history: historyUrls });
-  const response = await fetch("http://localhost:8000/recommendations", {
+  const response = await fetch("https://swm.rajkumaar.co.in/recommendations", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: requestBody,
