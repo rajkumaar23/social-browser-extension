@@ -1,5 +1,5 @@
 window.addEventListener("load", function () {
-  updateInterface(JSON.parse(localStorage.getItem("recommendationsObject")));
+  updateInterface(JSON.parse(localStorage.getItem("recommendationsObject") || []));
 });
 
 const submitBtn = document.querySelector("#submitBtn");
