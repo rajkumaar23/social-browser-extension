@@ -28,7 +28,10 @@ def text_from_html(body):
 
 
 def get_title_and_image(url):
-    response = requests.get(url)
+    try:
+        response = requests.get(url)
+    except:
+        return (None, None)
     soup = BeautifulSoup(response.content, 'html.parser')
     if response.status_code != 200 or soup.title == None:
         return (None, None)
@@ -70,7 +73,7 @@ def get_recommendations(urls):
             # print("Related : " + json.dumps(related_entities))
 
         top_related_entities = [entity for entity, count in Counter(
-            related_entities).most_common(10)]
+            related_entities).most_common(5)]
         print("Top related entities for " + url +
               " found : " + json.dumps(top_related_entities))
 
@@ -117,3 +120,5 @@ def _build_cors_preflight_response():
 def _corsify_actual_response(response):
     response.headers.add("Access-Control-Allow-Origin", "*")
     return response
+
+app.run(host='0.0.0.0', port=8000)
