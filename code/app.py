@@ -79,7 +79,7 @@ def get_recommendations(urls):
 
         for entity in top_related_entities:
             results = []
-            for result in search(entity + ' News', num=10, stop=2, pause=2, extra_params={'tbm': 'nws'}):
+            for result in search(entity + ' News', num=10, stop=1, pause=2, extra_params={'tbm': 'nws'}):
                 if result.count("/") > 3:
                     title, image = get_title_and_image(result)
                     if title == None:
@@ -91,7 +91,7 @@ def get_recommendations(urls):
                     })
             print("Searched for " + entity)
         top_recommendations = [json.loads(recommendation) for recommendation, count in Counter(
-            json.dumps(l) for l in recommendations).most_common(10)]
+            json.dumps(l) for l in recommendations).most_common(20)]
     print(top_recommendations)
     return top_recommendations
 
